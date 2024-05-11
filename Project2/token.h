@@ -1,3 +1,10 @@
+//
+// Created by 16672 on 2024/5/9.
+//
+
+#ifndef PROJECT2_TOKEN_H
+#define PROJECT2_TOKEN_H
+
 #include <iostream>
 #include <string>
 #include <cctype>
@@ -99,7 +106,7 @@ vector<Token> lex(string input) {
             tokens.push_back({tokenMap[buffer], buffer});
             buffer.clear();
         }
-        //buffer 的第一个字符是否是字母
+            //buffer 的第一个字符是否是字母
         else if (isalpha(buffer[0])) { // identifier
             //检查是否不是字母或数字
             if (i + 1 == input.size() || !isalnum(input[i + 1])) {
@@ -114,7 +121,7 @@ vector<Token> lex(string input) {
                 buffer.clear();
             }
         }
-        //不是运算符和界符，不是标识符和数字
+            //不是运算符和界符，不是标识符和数字
         else {
             tokens.push_back({UNKNOWN, buffer});
             buffer.clear();
@@ -124,23 +131,4 @@ vector<Token> lex(string input) {
     return tokens;
 }
 
-int main() {
-    vector<string> tests = {
-            "begin x:=9; if x>0 then x:=2*x+1/3; end#",
-            "x := 5",
-            "x : 5",
-            "x = 5",
-            "x := 5 + y : 7",
-            "num1 := num2 + 123"
-    };
-
-    for (const auto& test : tests) {
-        auto tokens = lex(test);
-        for (const auto& token : tokens) {
-            cout << "( " << token.type << ", " << token.value << " ) ";
-        }
-        cout << "\n\n";
-    }
-
-    return 0;
-}
+#endif //PROJECT2_TOKEN_H
